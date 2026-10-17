@@ -253,32 +253,6 @@ A 3-page interactive report with navigation buttons between pages.
 
 ---
 
-## 📁 Repository Structure
-
-```bash
-├── assets/
-│   ├── dashboard_v1_before.png               # Original dashboard (before)
-│   ├── dashboard_v2_overview.png             # Rebuilt dashboard: Overview page
-│   ├── dashboard_v2_behavior.png             # Rebuilt dashboard: Behavior page
-│   └── dashboard_v2_insights.png             # Rebuilt dashboard: Insights page
-├── data/
-│   ├── raw/
-│   │   └── customer_shopping_data.csv        # Raw dataset (3,900 rows, 18 features)
-│   └── processed/
-│       └── cleaned_customer_data.csv         # Cleaned, standardized, feature-engineered data
-├── sql/
-│   ├── 01_schema_setup.sql                   # Database definition & table staging scripts
-│   ├── 02_analytical_queries.sql             # Advanced CTEs, segmentation, and window queries
-│   └── 03_cohort_analysis.sql                # Retention and subscription behavior queries
-├── notebooks/
-│   └── customer_behavior_eda_cleaning.ipynb  # End-to-end Python EDA, cleaning & imputation
-├── reports/
-│   ├── shopping_behavior_dashboard.pbix      # Interactive Power BI report file (3 pages)
-│   └── executive_presentation.pdf            # Slide summary of findings & business recommendations
-├── requirements.txt                          # Python dependencies
-├── LICENSE                                   # MIT License
-└── README.md                                 # Project documentation
-```
 
 ---
 
