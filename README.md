@@ -8,7 +8,30 @@
 ## 🎯 Project Overview
 Modern retail growth depends on understanding customer lifetime value and how customers react to discounts. Without transaction analytics, retailers risk discounting products that already sell well, misjudging the value of subscriptions, and missing friction points in the conversion funnel.
 
-This project analyzes **3,900 consumer purchase transactions** using Python, PostgreSQL, and Power BI. It cleans and imputes missing data, uses SQL (window functions, CTEs, and segmentation) to answer business questions, and presents the results in an interactive dashboard. The analysis shows that **subscribers spend 32% more than non-subscribers** and that customer retention drives margin expansion.
+This project analyzes **3,900 consumer purchase transactions** using Python, PostgreSQL, and Power BI. It cleans and imputes missing data, uses SQL (window functions, CTEs, and segmentation) to answer business questions, and presents the results in a **3-page interactive Power BI report** (Overview, Behavior, Insights). The analysis shows that **subscribers spend 32% more than non-subscribers** and that customer retention drives margin expansion.
+
+---
+
+## 🖼️ Dashboard Preview
+
+### Before vs After
+I rebuilt my first dashboard from scratch: from basic charts showing totals to a 3-page report with navigation, a consistent design system, and actionable insights.
+
+| Before (v1) | After (v2) |
+|:---:|:---:|
+| <img width="987" height="540" alt="Image" src="https://github.com/user-attachments/assets/d580c1ff-ef1e-41b1-9674-8b87f19aa5c6" />| <img width="1064" height="596" alt="Image" src="https://github.com/user-attachments/assets/2714df22-2333-4d50-9883-26f7b0943162" />|
+
+### Page 1: Overview
+Revenue by category, age group, season and location, with subscription split and a Top/Bottom N location toggle.
+
+<img width="1064" height="596" alt="Image" src="https://github.com/user-attachments/assets/2714df22-2333-4d50-9883-26f7b0943162" />
+### Page 2: Behavior Deep-Dive
+Discount usage, repeat customers, revenue decomposition by gender, age group and category, a season heatmap, and subscriber rate by purchase frequency.
+<img width="1065" height="599" alt="Image" src="https://github.com/user-attachments/assets/3f91f588-1603-4c76-a180-c64e8adbf1d5" />
+### Page 3: Insights
+Key findings with evidence and recommendations.
+
+<img width="1058" height="597" alt="Image" src="https://github.com/user-attachments/assets/56e4c7ec-70b7-4bbd-ab75-0e867eac6f77" />
 
 ---
 
@@ -16,6 +39,12 @@ This project analyzes **3,900 consumer purchase transactions** using Python, Pos
 | Metric | Value |
 |--------|-------|
 | **Total Transactions** | 3,900 |
+| **Total Revenue** | $233K |
+| **Average Purchase Amount** | $59.76 |
+| **Average Review Rating** | 3.75 |
+| **Subscribers** | 27% of customers |
+| **Discount Usage** | 43% of customers |
+| **Repeat Customers** | 49.62% |
 | **Features per Transaction** | 18 (demographic, operational, and behavioral) |
 | **Business Questions Analyzed** | 10+ |
 | **Subscriber Spend Lift** | 32% higher than non-subscribers |
@@ -24,6 +53,26 @@ This project analyzes **3,900 consumer purchase transactions** using Python, Pos
 ---
 
 ## 🔍 Key Findings
+
+### 📦 Category Drives Revenue
+> **Clothing (44.7%) and Accessories (31.8%) generate ~76% of total revenue**
+
+Outerwear contributes only ~8%. Revenue across top states (5.5K to 5.8K) and seasons (56K to 60K) is almost flat, so product category matters far more than geography.
+
+### 👥 Male-Heavy Base, Low Subscription
+> **68% of customers are male and only 27% are subscribers**
+
+Female customers and the 73% non-subscribers are the biggest untapped growth segments.
+
+### 🎯 Young Adults Lead, Peaking in Winter
+> **Young Adults generate the highest revenue (62K) and peak in Winter (16.1K); Seniors dip to their lowest in Winter (12.9K)**
+
+The lead over other age groups is modest (about 10%), so it is a slight edge rather than a dominant trend.
+
+### 🔁 Subscription Rate and Purchase Frequency
+> **Weekly buyers have the highest subscriber rate (29.1%) vs Quarterly buyers (24.9%)**
+
+A gap of about 4 points: frequent buyers are slightly more open to subscribing.
 
 ### 💡 Subscription Lift
 > **Subscribers generate 32% higher average revenue than non-subscribers**
@@ -40,27 +89,25 @@ Faster shipping is linked with larger purchases.
 
 These discounts reduce raw margins and cannibalize profit.
 
-### 👥 Core Customer Group
-> **Purchases are concentrated among mid-age customers with higher repeat purchase rates**
-
-This age group is the main engine of repeat business.
-
 ---
 
 ## 💼 Business Recommendations
 Based on the analysis, the following actions are recommended:
 
-1. **Invest in Subscriptions**
-   Allocate 25% of acquisition budgets to sign-up incentives and free-trial loyalty funnels
+1. **Focus on High-Revenue Categories**
+   Prioritize marketing budget on Clothing and Accessories, and push Outerwear through bundles and winter offers
 
-2. **Use Free Express Shipping Tiers**
+2. **Invest in Subscriptions**
+   Allocate 25% of acquisition budgets to sign-up incentives and free-trial loyalty funnels, and offer subscriptions at the point of repeat purchase
+
+3. **Use Free Express Shipping Tiers**
    Offer free express shipping above a minimum cart amount to increase Average Order Value (AOV)
 
-3. **Rethink Blanket Discounts**
+4. **Rethink Blanket Discounts**
    Re-evaluate product price elasticity and replace blanket discounts with tiered volume offers (for example, Buy 2, Get 10%)
 
-4. **Target the Core Age Group**
-   Direct performance marketing spend toward the high-converting mid-age demographic
+5. **Target Under-Served and High-Value Segments**
+   Run campaigns to attract female customers, target Winter campaigns at Young Adults, and design a separate seasonal offer for Seniors
 
 ---
 
@@ -85,7 +132,10 @@ Based on the analysis, the following actions are recommended:
 - **Relational Analysis**: Queried 10+ business questions covering margin elasticity, cohort trends, and shipping efficiency using window functions, CTEs, and segmentation
 
 ### Power BI:
-- **Dashboard Design**: Built interactive visuals showing customer tiers, frequency trends, and margin-driving segments
+- **Data Modeling**: Dedicated `_Measures` table with DAX measures for revenue, customer counts, subscriber metrics, discount usage, and repeat-customer rate
+- **Dashboard Design**: 3-page report with a consistent theme, page navigation buttons, and slicers
+- **Dynamic Formatting**: Conditional bar colors driven by a DAX measure so the top performer is highlighted automatically, even when filters or the Top/Bottom toggle change
+- **Advanced Visuals**: Decomposition Tree, conditional-format heatmap matrix, Top N filtering, and dropdown/tile slicers
 
 ---
 
@@ -165,18 +215,28 @@ WHERE category_rank <= 3;
 
 ## 📊 Power BI Dashboard
 
-The report tracks key customer metrics across three areas:
+A 3-page interactive report with navigation buttons between pages.
 
-- **Revenue Performance:** Cross-filtering across categories, demographics, and geographical markets
-- **Cohort & Conversion Funnel:** Comparison of subscriber and non-subscriber behavior and discount reliance
-- **Logistics & Shipping:** Order size tracking linked to shipping speed and review ratings
+### Page 1: Overview
+- **KPI Cards:** Total Customers | Revenue | Avg Purchase Amount | Avg Review Rating
+- **Charts:** Location by Revenue (Top/Bottom N toggle), Customers by Subscription Status (donut), Revenue by Age Group, Category and Season
+- **Slicers:** Dropdown filters in the header
+- **Highlighting:** The top performer in each chart is automatically highlighted
+
+### Page 2: Behavior Deep-Dive
+- **KPI Cards:** Discount Usage % | Avg Previous Purchases | Revenue per Customer | Repeat Customer %
+- **Decomposition Tree:** Customers split by Gender, Age Group and Category
+- **Heatmap Matrix:** Revenue by Age Group and Season
+- **Column Chart:** Subscriber % by Purchase Frequency
+
+### Page 3: Insights
+- Key findings with supporting evidence and recommendations in a single readable page
 
 ```text
-[ Power BI Report Canvas ]
- ├── Top KPI Cards    : Total Revenue | Gross Orders | Subscription AOV Lift | Median Rating
- ├── Funnel Charts    : Customer Cohort Distribution (New vs. Returning vs. Loyal)
- ├── Matrix Visual    : Category Margin Elasticity vs. Discount Application
- └── Decomposition    : Revenue Contribution Split by Age Bracket and Shipping Method
+[ Power BI Report ]
+ ├── Overview   : KPI cards | Top N location bars | Subscription donut | Age / Category / Season charts
+ ├── Behavior   : KPI cards | Decomposition Tree | Age x Season heatmap | Subscriber % by frequency
+ └── Insights   : Evidence-backed findings and recommendations
 ```
 
 ---
@@ -196,6 +256,11 @@ The report tracks key customer metrics across three areas:
 ## 📁 Repository Structure
 
 ```bash
+├── assets/
+│   ├── dashboard_v1_before.png               # Original dashboard (before)
+│   ├── dashboard_v2_overview.png             # Rebuilt dashboard: Overview page
+│   ├── dashboard_v2_behavior.png             # Rebuilt dashboard: Behavior page
+│   └── dashboard_v2_insights.png             # Rebuilt dashboard: Insights page
 ├── data/
 │   ├── raw/
 │   │   └── customer_shopping_data.csv        # Raw dataset (3,900 rows, 18 features)
@@ -208,7 +273,7 @@ The report tracks key customer metrics across three areas:
 ├── notebooks/
 │   └── customer_behavior_eda_cleaning.ipynb  # End-to-end Python EDA, cleaning & imputation
 ├── reports/
-│   ├── shopping_behavior_dashboard.pbix      # Interactive Power BI report file
+│   ├── shopping_behavior_dashboard.pbix      # Interactive Power BI report file (3 pages)
 │   └── executive_presentation.pdf            # Slide summary of findings & business recommendations
 ├── requirements.txt                          # Python dependencies
 ├── LICENSE                                   # MIT License
@@ -249,6 +314,9 @@ psql -U postgres -d shopping_db -f sql/01_schema_setup.sql
 ```bash
 jupyter notebook notebooks/customer_behavior_eda_cleaning.ipynb
 ```
+
+### 4. Open the Dashboard
+Open `reports/shopping_behavior_dashboard.pbix` in Power BI Desktop.
 
 ---
 
